@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <title>Hello World</title>
+
+        <script src="js/jquery-2.1.4.min.js"></script>
+
+        <script>
+            var acelWatchID;
+
+            document.addEventListener("deviceReady", onDeviceReady, false);
+
+            function onDeviceReady() {
+                empezarAcelerometro();
+            }
+            function successAcelerometro(acceleration) {
+                $('#pasos').html('Acceleration X: ' + acceleration.x + '\n' +
+                        'Acceleration Y: ' + acceleration.y + '\n' + 'Acel Z: ' + acceleration.z);
+
+            }
+
+            function empezarAcelerometro() {
+                var opciones = {frequency: 500};
+                if (!acelWatchID) {
+                    acelWatchID = navigator.accelerometer.watchAcceleration(successAcelerometro, falloAcelerometro, opciones);
+                }
+            }
+
+            function falloAcelerometro() {
+                alert('onError!');
+            }
+        </script>
+    </head>
+    <body>
+        <div class="app">
+            <h4 id="pasos">
+                aasd
+            </h4>
+        </div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+    </body>
+</html>
